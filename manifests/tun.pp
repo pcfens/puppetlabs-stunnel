@@ -72,6 +72,18 @@
 #   By default we look this value up in a stunnel::data class, which has a
 #   list of common answers.
 #
+# [*timeout_busy*]
+#   Time to wait for expected data
+#
+# [*timeout_close*]
+#    Time to wait for close_notify (set to 0 for buggy MSIE)
+#
+# [*timeout_connect*]
+#   Time to wait to connect to a remote host
+#
+# [*timeout_idle*]
+#   Time to keep an idle connection
+#
 # === Examples
 #
 #   stunnel::tun { 'rsyncd':
@@ -102,17 +114,21 @@ define stunnel::tun(
     $client,
     $accept,
     $connect,
-    $user        = undef,
-    $group       = undef,
-    $ca_file     = undef,
-    $ca_path     = undef,
-    $crl_file    = undef,
-    $chroot      = undef,
-    $ssl_version = 'TLSv1',
-    $pid_file    = "/${name}.pid",
-    $debug_level = '0',
-    $log_dest    = "/var/log/${name}.log",
-    $conf_dir    = $stunnel::params::conf_dir
+    $user            = undef,
+    $group           = undef,
+    $ca_file         = undef,
+    $ca_path         = undef,
+    $crl_file        = undef,
+    $chroot          = undef,
+    $timeout_busy    = undef,
+    $timeout_close   = undef,
+    $timeout_connect = undef,
+    $timeout_idle    = undef,
+    $ssl_version     = 'TLSv1',
+    $pid_file        = "/${name}.pid",
+    $debug_level     = '0',
+    $log_dest        = "/var/log/${name}.log",
+    $conf_dir        = $stunnel::params::conf_dir
 ) {
 
   $ssl_version_real = $ssl_version ? {
