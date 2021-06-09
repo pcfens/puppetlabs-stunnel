@@ -124,7 +124,7 @@ define stunnel::tun(
     $timeout_close   = undef,
     $timeout_connect = undef,
     $timeout_idle    = undef,
-    $ssl_version     = 'TLSv1',
+    $ssl_version     = 'TLSv1.2',
     $pid_file        = "/${name}.pid",
     $debug_level     = '0',
     $log_dest        = "/var/log/${name}.log",
@@ -142,8 +142,6 @@ define stunnel::tun(
     true  => 'yes',
     false => 'no',
   }
-
-  validate_re($ssl_version_real, '^SSLv2$|^SSLv3$|^TLSv1$', 'The option ssl_version must have a value that is either SSLv2, SSLv3, of TLSv1. The default and prefered option is TLSv1. SSLv2 should be avoided.')
 
   file { "${conf_dir}/${name}.conf":
     ensure  => file,
